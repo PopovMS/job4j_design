@@ -6,10 +6,12 @@ import java.util.function.Function;
 
 /**
  * Клас переопределяет интерфейс итератор
- * Содержит поля массива и указателя
+ *
  */
 public class EvenNumbersIterator implements Iterator<Integer> {
-
+    /**
+     * Поля массива и индекса
+     */
     private int[] data;
     private int index;
 
@@ -17,36 +19,30 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         this.data = data;
     }
 
+    /**
+     * Метод ищет ближайшее четное значение в массиве
+     * @return возвращает true если четное значение найдено
+     */
     @Override
     public boolean hasNext() {
-        return search(index, false) != null;
+        while (index < data.length) {
+            if (data[index] % 2 == 0) {
+                return true;
+            }
+            index++;
+        }
+        return false;
     }
 
+    /**
+     * Метод возвращает текущее значение и сдвигает курсор дальше
+     * @return возвращает текущее значение массива
+     */
     @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return search(index, true);
+        return data[index++];
     }
-
-    /**
-     * общий метод перебора массива и поиска четного значения
-     * @param index принимает значение указателя - с какого элемента массива вести поиск
-     * @param vol булево значение, при значении true после удачного поиска
-     *            переводит указатель на значение следующее за искомым.
-     * @return возвращает найденый элемент массива. Если не найдено то null
-     */
-    public Integer search(int index, boolean vol) {
-        for (int i = index; i < data.length; i++) {
-            if (data[i] % 2 == 0) {
-                if (vol) {
-                    this.index = i + 1;
-                }
-                return data[i];
-            }
-        }
-        return null;
-    }
-
 }
