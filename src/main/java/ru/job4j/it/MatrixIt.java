@@ -25,9 +25,7 @@ public class MatrixIt implements Iterator<Integer> {
     public boolean hasNext() {
         while (row < data.length) {
             if (data[row].length != 0) {
-                if (data[row][column] != 0) {
                     return true;
-                }
             }
             moveCursor();
         }
