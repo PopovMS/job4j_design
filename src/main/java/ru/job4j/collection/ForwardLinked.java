@@ -31,6 +31,16 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
+     * Метод добавляет элемент в начало коллекции,
+     * меняет ссылку поля класа head на этот элемент
+     * @param value принимает элемент коллекции
+     */
+    public void addFirst(T value) {
+        Node<T> node = new Node<T>(value, head);
+        head = node;
+    }
+
+    /**
      * Метод удаляет первый элемент из коллекции
      * @return возвращает значение удаленного элемента коллекции
      */
