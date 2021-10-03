@@ -3,7 +3,7 @@ package ru.job4j.collection.list;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.job4j.collection.SimpleArrayList;
+
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

@@ -24,7 +24,6 @@ public class SimpleLinkedList<E> implements List<E> {
     private static class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
         Node(E element) {
             this.item = element;
@@ -46,7 +45,6 @@ public class SimpleLinkedList<E> implements List<E> {
         if (size == 0) {
             first = node;
         } else {
-            node.prev = last;
             last.next = node;
         }
         last = node;
