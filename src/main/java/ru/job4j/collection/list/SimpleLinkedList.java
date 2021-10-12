@@ -60,9 +60,8 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> rsl = new Node<E>(null);
-        rsl.next = first;
-            for (int i = 0; i <= index; i++) {
+        Node<E> rsl = first;
+            for (int i = 0; i < index; i++) {
                 rsl = rsl.next;
             }
         return rsl.item;
