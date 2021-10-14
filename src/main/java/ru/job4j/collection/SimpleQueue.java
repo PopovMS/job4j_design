@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import java.util.NoSuchElementException;
+
 /**
  * Класс описывает организацию данных по алгоритму "FIFO"
  * @param <T> принимает входящий элемент
@@ -7,27 +9,27 @@ package ru.job4j.collection;
 public class SimpleQueue<T> {
     private final SimpleStack<T> in = new SimpleStack<>();
     private final SimpleStack<T> out = new SimpleStack<>();
-    private int count;
+    private int inCount;
+    private int outCount;
+
     /**
-     * перекладывает элементы из стека in в стек out,
-     * извлекает последний элемент из out (бывший первым в in), удаляя его,
-     * перекладывает элементы обратно в in
+     * перекладывает элементы из стека in в стек out, если последний пустой.
+     * возвращает последний элемент из out (первый в очереди)
      * @return возвращает извлекаеммый элемент
      */
     public T poll() {
-        T rsl;
-        int tempCount = count;
-        while (tempCount > 0) {
+        if (inCount == 0 && outCount == 0) {
+            throw new NoSuchElementException();
+        }
+        if (outCount == 0) {
+            while (inCount > 0) {
                 out.push(in.pop());
-                tempCount--;
+                inCount--;
+                outCount++;
+            }
         }
-        rsl = out.pop();
-        count--;
-        while (tempCount < count) {
-            in.push(out.pop());
-            tempCount++;
-        }
-        return rsl;
+        outCount--;
+        return out.pop();
     }
 
     /**
@@ -36,6 +38,6 @@ public class SimpleQueue<T> {
      */
     public void push(T value) {
         in.push(value);
-        count++;
+        inCount++;
     }
 }
