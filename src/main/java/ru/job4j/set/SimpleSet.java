@@ -14,7 +14,6 @@ public class SimpleSet<T> implements Set<T> {
     private SimpleArrayList<T> set = new SimpleArrayList<>(5);
 
     @Override
-
     public boolean add(T value) {
         for (T vol : set) {
             if (vol == value || vol.equals(value)) {
