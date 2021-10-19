@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.collection.SimpleArrayList;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Класс реализует простую коллекцию
@@ -15,19 +16,17 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean add(T value) {
-        for (T vol : set) {
-            if (vol == value || vol.equals(value)) {
-                return false;
-            }
+        if (!contains(value)) {
+            set.add(value);
+            return true;
         }
-        set.add(value);
-        return true;
+        return false;
     }
 
     @Override
     public boolean contains(T value) {
         for (T vol : set) {
-            if (vol == value || vol.equals(value)) {
+            if (Objects.equals(vol, value)) {
                 return true;
             }
         }
