@@ -12,7 +12,6 @@ public class User {
     private String name;
     private int children;
     private Calendar birthday;
-
     /**
      * Конструктор класса
      * @param name поле name
