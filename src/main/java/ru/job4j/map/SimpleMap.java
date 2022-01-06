@@ -37,7 +37,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         boolean rsl = false;
         int hashCode = key.hashCode();
         int hash = hash(hashCode);
-        if (count * 100 / capacity >= LOAD_FACTOR * 100) {
+        if (count >= LOAD_FACTOR * capacity) {
             expand();
         }
         if (table[indexFor(hash)] == null) {
@@ -93,7 +93,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V rsl = null;
         int index = indexFor(hash(key.hashCode()));
-        if (index < table.length && table[index] != null) {
+        if (table[index] != null && table[index].key.equals(key)) {
             rsl = table[index].value;
         }
         return rsl;
@@ -108,7 +108,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         boolean rsl = false;
         int index = indexFor(hash(key.hashCode()));
-        if (table[index] != null) {
+        if (table[index] != null && table[index].key.equals(key)) {
             table[index] = null;
             count--;
             modCount++;
