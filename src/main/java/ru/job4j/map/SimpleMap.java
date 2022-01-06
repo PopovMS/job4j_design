@@ -24,8 +24,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     /**
      * Метод добавляет ключ и значение в массив table, вычисляя хэш-код ключа, а затем хеширует.
-     * Если по хешу метод get возвращает null, значит ячейка массива свободна, происходит проверка
-     * на превышения фактора загрузки, если не превышен, происходит запись в ячейку массива
+     * происходит проверка на превышения фактора загрузки, если не превышен, происходит запись в ячейку массива
+     * Проверяется, если ячейка массива пуста, происходит создание объекта с ключом и значением и вставка его в
+     * массив
      * @param key - принимает объект ключа
      * @param value принимает объект значения
      * @return возвращает true, если вставка осуществилась,
@@ -33,19 +34,20 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean put(K key, V value) {
+        boolean rsl = false;
         int hashCode = key.hashCode();
         int hash = hash(hashCode);
-        if (get(key) == null) {
-            if ((float) count / (float) capacity >= LOAD_FACTOR) {
-                expand();
-            }
+        if (count * 100 / capacity >= LOAD_FACTOR * 100) {
+            expand();
+        }
+        if (table[indexFor(hash)] == null) {
             MapEntry vol = new MapEntry(key, value);
             table[indexFor(hash)] = vol;
             count++;
             modCount++;
-            return true;
+            rsl = true;
         }
-        return false;
+        return rsl;
     }
 
     /**
@@ -75,7 +77,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         capacity = capacity * 2;
         MapEntry<K, V>[] temp = new MapEntry[capacity];
         for (MapEntry vol : table) {
-            temp[indexFor(hash(vol.hashCode()))] = vol;
+            if (vol != null) {
+                temp[indexFor(hash(vol.hashCode()))] = vol;
+            }
         }
         table = temp;
     }
@@ -87,12 +91,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
-        for (MapEntry vol : table) {
-            if (vol != null && key.equals(vol.key)) {
-                return (V) vol.value;
-            }
+        V rsl = null;
+        int index = indexFor(hash(key.hashCode()));
+        if (index < table.length && table[index] != null) {
+            rsl = table[index].value;
         }
-        return null;
+        return rsl;
     }
 
     /**
@@ -102,15 +106,15 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean remove(K key) {
-        for (MapEntry vol : table) {
-            if (vol != null && key.equals(vol.key)) {
-                table[indexFor(hash(key.hashCode()))] = null;
-                count--;
-                modCount++;
-                return true;
-            }
+        boolean rsl = false;
+        int index = indexFor(hash(key.hashCode()));
+        if (table[index] != null) {
+            table[index] = null;
+            count--;
+            modCount++;
+            rsl = true;
         }
-        return false;
+        return rsl;
     }
 
     /**
@@ -120,25 +124,28 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         return new Iterator<K>() {
-            int cursor = 0, index = 0;
+            int index = 0;
             final int expectedModCount = modCount;
             @Override
             public boolean hasNext() {
-                return cursor < count;
+                boolean rsl = false;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                while (index < table.length) {
+                    if (table[index] != null) {
+                        rsl = true;
+                        break;
+                    }
+                    index++;
+                }
+                return rsl;
             }
-
             @Override
             public K next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                while (index < table.length && table[index] == null) {
-                    index++;
-                }
-                cursor++;
                 return table[index++].key;
             }
         };
