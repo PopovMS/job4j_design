@@ -78,7 +78,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] temp = new MapEntry[capacity];
         for (MapEntry vol : table) {
             if (vol != null) {
-                temp[indexFor(hash(vol.hashCode()))] = vol;
+                temp[indexFor(hash(vol.key.hashCode()))] = vol;
             }
         }
         table = temp;
