@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Класс реализует интерфейс Tree
@@ -33,18 +34,40 @@ public class SimpleTree<E> implements Tree<E> {
     }
 
     /**
-     * Метод находит узел по значению
+     * Метод передает методу поиска условие по которому
+     * необходимо найти и сравнить значение value
      * @param value принимает значение искомого узла
      * @return возвращает Optional объект с узлом
      */
     @Override
     public Optional<Node<E>> findBy(E value) {
+        return findByPredicate(el -> el.value.equals(value));
+    }
+
+    /**
+     * Метод передает методу поиска условие по которому необходимо
+     * найти узлы с количеством потомков более двух
+     * @return возвращает true если узлов с количеством потомков более
+     * двух нет, false - если узлы с количеством потомков более двух
+     * присутствуют
+     */
+    @Override
+    public boolean isBinary() {
+        return findByPredicate(el -> el.children.size() > 2).isEmpty();
+    }
+
+    /**
+     * Метод поиска по дереву
+     * @param condition принимает поведение, фильтр или условие поиска
+     * @return возвращает найденные по условию узлы завёрнутые в Optional
+     */
+    private Optional<Node<E>> findByPredicate(Predicate<Node<E>> condition) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.value.equals(value)) {
+            if (condition.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
