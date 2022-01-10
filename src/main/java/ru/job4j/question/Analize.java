@@ -1,7 +1,10 @@
 package ru.job4j.question;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Класс сравнивает две коллекции и взвращает сколько добавлено, удалено и изменено объектов коллекций
@@ -13,19 +16,19 @@ public class Analize {
         HashSet<User> curList = new HashSet<>(current);
         prevList.removeAll(curList);
         curList.removeAll(previous);
-        HashSet<User> prevTemp = new HashSet<>(prevList);
-        HashSet<User> currTemp = new HashSet<>(current);
-        for (User mUser : prevTemp) {
-            for (User pUser : currTemp) {
-                if (mUser.getId() == pUser.getId()) {
-                    prevList.remove(mUser);
-                    curList.remove(pUser);
-                    info.setChanged(info.getChanged() + 1);
-                }
+        Map<Object, Object> prevTemp = prevList.stream().collect(Collectors.toMap(k -> k.getId(), v -> v.getName()));
+        Map<Object, Object> currTemp = curList.stream().collect(Collectors.toMap(k -> k.getId(), v -> v.getName()));
+
+        for (Object key : prevTemp.keySet()) {
+            if (currTemp.containsKey(key)) {
+                currTemp.remove(key);
+                info.setChanged(info.getChanged() + 1);
+            } else {
+                info.setDeleted(info.getDeleted() + 1);
             }
         }
-        info.setAdded(curList.size());
-        info.setDeleted(prevList.size());
+
+        info.setAdded(currTemp.size());
 
             return info;
     }
