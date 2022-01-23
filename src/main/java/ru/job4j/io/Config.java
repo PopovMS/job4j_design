@@ -31,9 +31,10 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
+                    .filter(s -> !s.startsWith("#"))
+                    .filter(s -> !s.isEmpty())
                     .map(s -> s.split("="))
                     .filter(array -> array.length > 1)
-                    .filter(vol -> !vol[0].startsWith("#"))
                     .forEach(vol -> {
                         if (vol[0].isEmpty()) {
                             throw new IllegalArgumentException();
