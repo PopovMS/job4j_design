@@ -23,7 +23,7 @@ public class AnalizyTest {
                             + "500 11:01:02\n"
                             + "200 11:02:02");
         }
-        new Analizy().unavailable("./server_log.txt", target.getAbsolutePath());
+        new Analizy().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
