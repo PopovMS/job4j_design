@@ -13,8 +13,8 @@ import java.util.function.Predicate;
  *Класс поиска по предикату
  */
 public class SearchFiles extends SimpleFileVisitor<Path> {
-    List<Path> paths = new ArrayList<>();
-    Predicate<Path> condition;
+    private List<Path> paths = new ArrayList<>();
+    private Predicate<Path> condition;
     public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
