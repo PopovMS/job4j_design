@@ -14,19 +14,10 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileP = new FileProperty(attrs.size(), file.getFileName().toString());
         List<Path> value;
-        /**
-        if (map.containsKey(fileP)) {
-            value = map.get(fileP);
-        } else {
-            value = new ArrayList<>();
-        }
-         */
-        map.putIfAbsent(fileP, Arrays.asList(file));
+        map.putIfAbsent(fileP, new ArrayList<>(Arrays.asList()));
         value = map.get(fileP);
         value.add(file);
         map.put(fileP, value);
-
-
         return super.visitFile(file, attrs);
     }
 
