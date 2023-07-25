@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *Клас осуществляет обход дерева файлов и каталогов и ищет файлы по условию в предикате
@@ -52,6 +54,12 @@ public class Search {
         }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+        }
+        String regex = "^[a-z0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(args[1]);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Неверный формат расширения файла");
         }
         return true;
     }
