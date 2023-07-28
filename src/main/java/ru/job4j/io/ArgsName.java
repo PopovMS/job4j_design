@@ -18,11 +18,7 @@ public class ArgsName {
      */
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException(new StringBuilder()
-                    .append("This key: '")
-                    .append(key)
-                    .append("' is missing")
-                    .toString());
+            throw new IllegalArgumentException("This key: '%s' is missing".formatted(key));
         }
         return values.get(key);
     }
@@ -61,33 +57,17 @@ public class ArgsName {
         }
         for (String vol : args) {
             if (!vol.contains("=")) {
-                throw new IllegalArgumentException(new StringBuilder()
-                        .append("Error: This argument '")
-                        .append(vol)
-                        .append("' does not contain an equal sign")
-                        .toString());
+                throw new IllegalArgumentException("Error: This argument '%s' does not contain an equal sign".formatted(vol));
             }
             if (!vol.startsWith("-")) {
-                throw new IllegalArgumentException(new StringBuilder()
-                        .append("Error: This argument '")
-                        .append(vol)
-                        .append("' does not start with a '-' character")
-                        .toString());
+                throw new IllegalArgumentException("Error: This argument '%s' does not start with a '-' character".formatted(vol));
             }
             String[] temp =  vol.substring(1).split("=");
             if (!Pattern.compile("^[a-zA-Z0-9]+$").matcher(temp[0]).matches()) {
-                throw new IllegalArgumentException(new StringBuilder()
-                        .append("Error: This argument '")
-                        .append(vol)
-                        .append("' does not contain a key")
-                        .toString());
+                throw new IllegalArgumentException("Error: This argument '%s' does not contain a key".formatted(vol));
             }
             if (temp.length == 1) {
-                throw new IllegalArgumentException(new StringBuilder()
-                        .append("Error: This argument '")
-                        .append(vol)
-                        .append("' does not contain a value")
-                        .toString());
+                throw new IllegalArgumentException("Error: This argument '%s' does not contain a value".formatted(vol));
             }
         }
     }
