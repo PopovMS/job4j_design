@@ -10,38 +10,38 @@ public class CSVReader {
     public static void handle(ArgsName argsName) {
         String out = argsName.get("out");
         Path targetPath;
-        if (out.equals("stdout")) {
+        if ("stdout".equals(out)) {
             targetPath = Paths.get("C:\\Projects\\job4j_design\\data\\target.csv");
         } else {
             targetPath = Paths.get(out);
         }
         List<String> target = new ArrayList<>();
 
-        var line = new Scanner(new ByteArrayInputStream(readFile(argsName.get("path")).getBytes()))
-        .useDelimiter(System.getProperty("line.separator"));
+        try (var line = new Scanner(new ByteArrayInputStream(readFile(argsName.get("path")).getBytes()))
+        .useDelimiter(System.getProperty("line.separator"))) {
 
-        /* Извлекаем строку с названием столбцов */
+            /* Извлекаем строку с названием столбцов */
             if (line.hasNext()) {
-              List<String> header = new ArrayList<>(Arrays.asList(line.nextLine().split(argsName.get("delimiter"))));
+                List<String> header = new ArrayList<>(Arrays.asList(line.nextLine().split(argsName.get("delimiter"))));
 
                 /* Извлекаем список фильтров в массив*/
-              String[] filter = argsName.get("filter").split(",");
+                String[] filter = argsName.get("filter").split(",");
 
                 /* Создание массива индексов искомых столбцов*/
-              int[] indexColumn = new int[filter.length];
-              for (int i = 0; i < filter.length; i++) {
-                  indexColumn[i] = header.indexOf(filter[i]);
-              }
-              target.add(filterLine(header, indexColumn, argsName.get("delimiter")));
+                int[] indexColumn = new int[filter.length];
+                for (int i = 0; i < filter.length; i++) {
+                    indexColumn[i] = header.indexOf(filter[i]);
+                }
+                target.add(filterLine(header, indexColumn, argsName.get("delimiter")));
 
                 /* Чтение из файла остальных строк таблицы и запись их в массив target*/
-              while (line.hasNext()) {
-                  List<String> nextLine = new ArrayList<>(Arrays.asList(line.nextLine().split(argsName.get("delimiter"))));
-                  target.add(filterLine(nextLine, indexColumn, argsName.get("delimiter")));
-              }
+                while (line.hasNext()) {
+                    List<String> nextLine = new ArrayList<>(Arrays.asList(line.nextLine().split(argsName.get("delimiter"))));
+                    target.add(filterLine(nextLine, indexColumn, argsName.get("delimiter")));
+                }
             }
-
-        saveFile(target, targetPath.toString());
+            saveFile(target, targetPath.toString());
+        }
     }
 
     /**
@@ -97,7 +97,7 @@ public class CSVReader {
 
         /* Проверка значения аргумента out */
         String out = argsName.get("out");
-        if (!out.equals("stdout")) {
+        if (!"stdout".equals(out)) {
             if (!Paths.get(out).isAbsolute()) {
                 throw new IllegalArgumentException("Неверный формат аргумента out");
             }
