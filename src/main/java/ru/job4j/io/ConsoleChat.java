@@ -1,5 +1,8 @@
 package ru.job4j.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -59,7 +63,7 @@ public class ConsoleChat {
                     .map(string -> string + System.lineSeparator())
                     .forEach(result::add);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("ERROR", e);
         }
         return result;
     }
@@ -72,12 +76,13 @@ public class ConsoleChat {
         try (PrintWriter writer = new PrintWriter(new FileWriter(path, StandardCharsets.UTF_8, true))) {
             log.forEach(writer::println);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("ERROR", e);
         }
 
     }
 
     public static void main(String[] args) {
+
         ConsoleChat consoleChat = new ConsoleChat("C:\\Projects\\job4j_design\\data\\log.txt", "C:\\Projects\\job4j_design\\data\\AnswersOfBot.txt");
         consoleChat.run();
     }
