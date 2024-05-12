@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<item id="35501"  name="notWorkSBIS" desc="need update SBIS-client" isActive="true" >
+    <dateOfChanges>
+        <dateOfChange>9.05.24</dateOfChange>
+        <dateOfChange>11.05.24</dateOfChange>
+    </dateOfChanges>
+    <client>
+        <name>Ivanov</name>
+        <mainOffice>true</mainOffice>
+        <numberDep>7</numberDep>
+        <phone>251</phone>
+    </client>
+</item>
