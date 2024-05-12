@@ -24,4 +24,20 @@ public class Client {
                 + ", phone='" + phone + '\''
                 + '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isMainOffice() {
+        return mainOffice;
+    }
+
+    public int getNumberDep() {
+        return numberDep;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
 }

@@ -31,4 +31,28 @@ public class Item {
                 + ", client=" + client.toString()
                 + '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public String[] getDateOfChange() {
+        return dateOfChange;
+    }
+
+    public Client getClient() {
+        return client;
+    }
 }
