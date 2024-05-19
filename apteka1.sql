@@ -1,7 +1,8 @@
 create table patient(
     id serial primary key,
     name varchar(255),
-  	address varchar(255)
+  	address varchar(255),
+  	area_id int references area(id),
 );
 
 create table snils(
