@@ -74,6 +74,6 @@ select * from teens;
 
 select n1.name, '-', n2.name 
 	from teens n1 cross join teens n2 
-	where n1.name != n2.name and n1.gender != n2.gender;
+	where n1.gender > n2.gender;
 
 
