@@ -67,16 +67,6 @@ values (4, 3);
 insert into orders (cars_id, client_id)
 values (2, 4);
 
-	select cl.name as "Client_name", ct.name as "transmission_name", count(ct.name)
-from clients as cl
-		join orders as o on cl.id = o.client_id
-		join cars as c on o.cars_id = cl.id
-		join car_transmissions as ct on c.transmission_id = ct.id
-	group by (cl.name, ct.name)
-
-
-
-
 create view show_clients_transmissions 
 as
 select  cl.name as Client_name, 
