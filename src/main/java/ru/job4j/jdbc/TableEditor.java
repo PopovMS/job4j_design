@@ -13,7 +13,7 @@ public class TableEditor implements AutoCloseable {
     private Statement statement;
     /**
      * Создает все объекты и запускает методы класса
-     * @param args
+     * @param args Массив параметров
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
