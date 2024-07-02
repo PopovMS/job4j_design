@@ -27,15 +27,13 @@ public class NonNullIterator implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        boolean result = false;
         while (index < data.length) {
             if (!Objects.isNull(data[index])) {
-                result = true;
-                break;
+                return true;
             }
             index++;
         }
-        return result;
+        return false;
     }
 
     /**
