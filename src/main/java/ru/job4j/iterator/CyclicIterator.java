@@ -19,21 +19,12 @@ public class CyclicIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Метод ищет ближайший не null объект
-     * @return возвращает true если не null значение найдено
+     * Метод проверяет, не пустой ли список
+     * @return возвращает true если список содержит объекты
      */
     @Override
     public boolean hasNext() {
-        if (index == data.toArray().length) {
-            index = 0;
-        }
-        while (index < data.toArray().length) {
-            if (!Objects.isNull(data.get(index))) {
-                return true;
-            }
-            index++;
-        }
-        return false;
+        return !data.isEmpty();
     }
 
     /**
@@ -42,6 +33,9 @@ public class CyclicIterator<T> implements Iterator<T> {
      */
     @Override
     public T next() {
+        if (index == data.toArray().length) {
+            index = 0;
+        }
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
