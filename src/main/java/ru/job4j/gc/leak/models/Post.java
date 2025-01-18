@@ -9,7 +9,12 @@ public class Post {
 
     private String text;
 
-    private List<Comment> comments;
+    private final List<Comment> comments;
+
+    public Post(String text, List<Comment> comments) {
+        this.text = text;
+        this.comments = comments;
+    }
 
     public int getId() {
         return id;
@@ -31,9 +36,6 @@ public class Post {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     @Override
     public boolean equals(Object o) {
