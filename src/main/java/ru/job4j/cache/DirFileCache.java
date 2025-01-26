@@ -21,8 +21,8 @@ public class DirFileCache extends AbstractCache<String, String> {
         try (BufferedReader reader = new BufferedReader(
                 new FileReader(cachingDir
                         .concat(key)))) {
-            reader.lines()
-                    .forEach(joiner::add);
+                        reader.lines()
+                        .forEach(joiner::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
