@@ -18,8 +18,8 @@ public abstract class AbstractCache<K, V> {
         }
         V strong = cache.get(key).get();
         if (strong == null) {
+            strong = load(key);
             this.put(key, load(key));
-            strong = cache.get(key).get();
         }
         return strong;
     }
