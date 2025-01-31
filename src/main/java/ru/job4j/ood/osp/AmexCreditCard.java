@@ -1,6 +1,6 @@
 package ru.job4j.ood.osp;
 
-public class AmexCreditCard extends CreditCard {
+public class AmexCreditCard implements CreditCard {
     @Override
     public void authorize() {
         System.out.println("Authorizing AMEX payment");
