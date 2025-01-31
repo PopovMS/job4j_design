@@ -1,14 +1,13 @@
 package ru.job4j.ood.osp;
 
 public class NotificationService {
-    private EmailService emailService;
+    private EmailSendService emailService;
 
-    public NotificationService(EmailService emailService) {
+    public NotificationService(EmailSendService emailService) {
         this.emailService = emailService;
     }
-
     public void sendNotification(String recipient, String message) {
-        emailService.sendEmail(recipient, message);
+        emailService.sendMessage(recipient, message);
         System.out.println("Notification sent");
     }
 }
