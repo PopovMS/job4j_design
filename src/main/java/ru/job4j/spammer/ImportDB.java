@@ -22,7 +22,7 @@ public class ImportDB {
     /**
      * загружает данные из файла в формате ключ-значение, проверяет ключевую пару на валидность
      * @return возвращает ArrayList объектов User
-     * @throws IOException
+     * @throws IOException - возможны исключения при попытке чтения из файла
      */
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
@@ -46,8 +46,8 @@ public class ImportDB {
     /**
      * Сохранает объекты User из ArrayList в базу данных
      * @param users принимает список объектов
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @throws ClassNotFoundException - возможно отсутствие класса
+     * @throws SQLException - возможны ошибки подключения к jdbc
      */
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
         Class.forName(config.getProperty("jdbc.driver"));
