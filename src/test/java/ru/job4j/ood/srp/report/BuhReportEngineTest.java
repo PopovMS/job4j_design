@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BuhReportEngineTest {
 
     @Test
-    public void reportForBuh() {
+    public void reportForBuh() throws Exception {
         MemoryStore store = new MemoryStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100000);

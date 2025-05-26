@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HrReportEngineTest {
 
     @Test
-    public void reportForHr() {
+    public void reportForHr() throws Exception {
         MemoryStore store = new MemoryStore();
         Calendar now = Calendar.getInstance();
         List<Employee> inboxlist = Arrays.asList(
