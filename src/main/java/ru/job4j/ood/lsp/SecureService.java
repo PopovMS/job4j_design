@@ -1,7 +1,7 @@
 package ru.job4j.ood.lsp;
 
 public class SecureService extends BaseService {
-    protected void processData() {  /* Нарушение LSP */
+    public void processData() {  /* Нарушение LSP */
      /* защищенная обработка данных */
     }
 }
