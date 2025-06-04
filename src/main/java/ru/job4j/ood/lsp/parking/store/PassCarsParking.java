@@ -1,22 +1,8 @@
 package ru.job4j.ood.lsp.parking.store;
 
-import ru.job4j.ood.lsp.parking.model.Car;
+public class PassCarsParking extends AbstractCarsParking {
 
-import java.util.function.Predicate;
-
-public class PassCarsParking implements CarsParking {
-    @Override
-    public void addCar(Car car) {
-
-    }
-
-    @Override
-    public void findBy(Predicate<Car> filter) {
-
-    }
-
-    @Override
-    public void removeCar(String id) {
-
+    public PassCarsParking(int freeSpice) {
+        super(freeSpice);
     }
 }

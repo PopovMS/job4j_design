@@ -1,14 +1,13 @@
 package ru.job4j.ood.lsp.parking.model;
 
-public class Bus implements Car {
-    int size;
+public class Bus extends AbstractCar {
 
-    public Bus(int size) {
-        this.size = size;
+    public Bus(String name, int size) {
+        super(name);
     }
 
     @Override
     public int getSize() {
-        return size;
+        return super.getSize();
     }
 }
