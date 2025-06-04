@@ -6,8 +6,8 @@ public class Warehouse extends AbstractStore {
     @Override
     public boolean add(Food food) {
         boolean result = false;
-        if (food.getFreshLevel() >= 75) {
-            super.foods.add(food);
+        if (food.getFreshLevel() >= fresh75) {
+            super.add(food);
             result = true;
         }
         return result;

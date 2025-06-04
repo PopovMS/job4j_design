@@ -27,7 +27,7 @@ class ControlQualityTest {
                 LocalDateTime.of(2025, 5, 20, 0, 0),
                 LocalDateTime.of(2025, 7, 29, 0, 0));
         milk.setPrice(120);
-        ControlQuality service = new ControlQuality(store);
+        ControlQuality service = new ControlQuality(store, new FreshLevel());
         service.put(milk);
         assertThat("Prostokvashino").isEqualTo(whouse.findAll().get(0).getName());
     }
@@ -45,7 +45,7 @@ class ControlQualityTest {
                 LocalDateTime.of(2025, 5, 20, 0, 0),
                 LocalDateTime.of(2025, 6, 29, 0, 0));
         milk.setPrice(120);
-        ControlQuality service = new ControlQuality(store);
+        ControlQuality service = new ControlQuality(store, new FreshLevel());
         service.put(milk);
         assertThat("Prostokvashino").isEqualTo(shop.findAll().get(0).getName());
     }
@@ -63,7 +63,7 @@ class ControlQualityTest {
                 LocalDateTime.of(2025, 5, 20, 0, 0),
                 LocalDateTime.of(2025, 5, 29, 0, 0));
         milk.setPrice(120);
-        ControlQuality service = new ControlQuality(store);
+        ControlQuality service = new ControlQuality(store, new FreshLevel());
         service.put(milk);
         assertThat("Prostokvashino").isEqualTo(trash.findAll().get(0).getName());
     }
