@@ -25,7 +25,7 @@ class ControlQualityTest {
         store.add(trash);
         Food milk = new Milk("Prostokvashino",
                 LocalDateTime.of(2025, 5, 20, 0, 0),
-                LocalDateTime.of(2025, 7, 29, 0, 0));
+                LocalDateTime.of(2025, 8, 29, 0, 0));
         milk.setPrice(120);
         ControlQuality service = new ControlQuality(store, new FreshLevel());
         service.put(milk);

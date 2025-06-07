@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class AbstractStore implements Store {
 
     private List<Food> foods = new ArrayList<>();
-    public final int fresh0 = 25;
+    public final int fresh0 = 0;
     public final int fresh25 = 25;
     public final int fresh75 = 75;
 
