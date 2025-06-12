@@ -4,7 +4,7 @@ import ru.job4j.ood.lsp.parking.model.Car;
 
 public interface ParkService {
 
-    public boolean park(Car car);
+    boolean park(Car car);
 
-    public boolean unpark(Car car);
+    void unpark(String name);
 }

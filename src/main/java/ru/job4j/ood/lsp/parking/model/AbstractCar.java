@@ -3,6 +3,7 @@ package ru.job4j.ood.lsp.parking.model;
 abstract class AbstractCar implements Car {
     private String name;
     private int size = 1;
+    private int id;
 
     public AbstractCar(String name) {
         this.name = name;

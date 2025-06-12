@@ -7,13 +7,13 @@ import java.util.function.Predicate;
 
 public interface CarsParking {
 
-    public void addCar(Car car);
+    void addCar(Car car);
 
-    public List<Car> findBy(Predicate<Car> filter);
+    List<Car> findBy(Predicate<Car> filter);
 
-    public Car findById(String id);
+    void removeCar(String id);
 
-    public void removeCar(String id);
+    int getFreeSpice();
 
-    public int getFreeSpice();
+    int getParkCellSize();
 }

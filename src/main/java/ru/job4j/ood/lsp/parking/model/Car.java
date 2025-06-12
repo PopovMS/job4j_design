@@ -4,7 +4,5 @@ public interface Car {
 
     String getName();
 
-    default int getSize() {
-        return 1;
-    }
+    int getSize();
 }
