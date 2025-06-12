@@ -47,10 +47,6 @@ public class ParkServiceTest {
         ParkService parkService = new SimpleParkService(carsParkings);
         parkService.park(truck);
         parkService.park(truck2);
-        List <Car> list = largeCars.findBy(car -> "MAN".equals(car.getName()));
-        for(Car car : list) {
-            System.out.println(car.getName());
-        }
         assertThat(passCars.findBy(car -> "MAN".equals(car.getName())).get(0)).isEqualTo(truck2);
     }
 
