@@ -13,5 +13,7 @@ public interface Store {
 
     void delete(String name);
 
+    void clear();
+
     List<Food> findBy(Predicate<Food> filter);
 }
